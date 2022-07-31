@@ -1,7 +1,7 @@
 <template>
 <header>
     <h1>{{ title }}</h1>
-    <Button @btn-click="$emit('toggle-form')" :btnTitle="addTask?'Close': 'Add Task'" class="btn" :color="addTask?'red':'green'"></Button>
+    <Button v-show="homePage" @btn-click="$emit('toggle-form')" :btnTitle="addTask?'Close': 'Add Task'" class="btn" :color="addTask?'red':'green'"></Button>
 </header>
 </template>
 
@@ -19,6 +19,16 @@ export default{
     //register external components
     components:{
         Button,
+    },
+    computed:{
+        homePage(){
+            //if we are in the homepage return true/false so we can show/hide the add task btn
+            if(this.$route.path === '/'){
+                return true;
+            }else{
+                return false;
+            }
+        }
     },
     emits:['toggle-form']
 }
